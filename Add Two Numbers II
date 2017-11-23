@@ -1,0 +1,50 @@
+/** Add Two Numbers II
+ *Input: (7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
+ *Output: 7 -> 8 -> 0 -> 7
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+     ListNode t1=reverse(l1),t2=reverse(l2),result=null,r=null;    
+        int c=0;
+        while(t1!=null||t2!=null)
+        {  int sum=0;
+           if(t1!=null) {sum+=t1.val;t1=t1.next;}
+           if(t2!=null) {sum+=t2.val;t2=t2.next;}
+           sum+=c;
+           c=sum/10;
+         if(result==null)
+         {
+          result=new ListNode(sum%10);
+          r=result ;
+         }
+         else
+         {
+          r.next=new ListNode(sum%10);
+          r=r.next;
+         }
+        }
+        if(c>0){
+         r.next=new ListNode(c);
+          r=r.next;
+        }     
+        return reverse(result);      
+    }
+    ListNode reverse(ListNode head)      //Reverse Function
+    {
+        ListNode t=head,p=null,save=head;
+        while(t!=null)
+        {
+         save=t.next;
+         t.next=p;
+         p=t;
+         t=save;            
+        }
+        return p;
+    }
+}
