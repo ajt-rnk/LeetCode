@@ -1,0 +1,53 @@
+/**  Partition-List
+ *Input 1->4->3->2->5->2 and x = 3,
+ *Output  1->2->2->4->3->5 
+ *
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        if(head==null) return null;
+       ListNode temp1=null,temp2=null,head1=null,head2=null;
+       while(head!=null)
+       {
+        if(head.val<x)
+        {
+          if(head1==null)
+             {
+              temp1=head;
+              head1=head;
+             } 
+        else
+            {
+            temp1.next=head;
+            temp1=temp1.next;
+            }      
+         }
+        else
+        {
+         if(head2==null)
+            {
+             head2=head;
+             temp2=head;
+            }
+        else 
+            {
+            temp2.next =head;
+            temp2=temp2.next;
+            }    
+        }
+           head=head.next;
+       }
+        if(head1==null) 
+         return head2;
+         temp1.next=head2;
+        if(temp2!=null)
+         temp2.next=null;
+      return head1;
+    }
+}
