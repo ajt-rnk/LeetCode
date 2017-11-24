@@ -1,0 +1,30 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s==null) return 0;
+        Map<Character,Integer> map=new LinkedHashMap<>();
+        int l=s.length(),i,j,k=0,m=0;
+        for(i=0;i<l;i++)
+        {
+         char ch=s.charAt(i);   
+         if(map.containsKey(ch))
+         {
+         for(;k<i;k++)
+         {
+           char ch1=s.charAt(k);  
+           map.remove(ch1);
+           if(ch1==ch)
+               break;
+         }
+             map.put(ch,1);
+             k++;
+         }
+          else
+            {
+                if(m<(i-k+1))
+                    m=(i-k+1);
+                  map.put(ch,1); 
+            } 
+        }
+        return m;
+    }
+}
